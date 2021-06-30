@@ -6,7 +6,15 @@ Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webAR/ using you
 
 ![marker](https://raw.githubusercontent.com/sebstryczek/unity__playground__webgl-ar/main/docs/webAR/data/markersImages/4experience.png)
 
-
-## TODO:
+### TODO:
 1. Fix marker generator for WebAR
-2. Add WebXR example
+2. Fix for desktop browsers
+
+## WebXR
+
+Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webXR using your phone.
+
+### TODO:
+1. Upgrade html template for Unity 2020.
+2. Create easy to manage scene
+
