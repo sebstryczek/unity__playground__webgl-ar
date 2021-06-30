@@ -10,6 +10,8 @@ Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webAR/ using you
 1. Fix marker generator for WebAR
 2. Fix for desktop browsers
 
+<br /><br />
+
 ## WebXR
 
 Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webXR using your phone.
