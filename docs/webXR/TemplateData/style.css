@@ -1,6 +1,7 @@
 body {
   padding: 0;
   margin: 0;
+  background: #000000;
 }
 #unity-container {
   position: absolute;
@@ -31,19 +32,19 @@ body {
 #unity-logo {
   width: 154px;
   height: 130px;
-  background: url("./unity-logo-light.png") no-repeat center;
+  background: url("./unity-logo-dark.png") no-repeat center;
 }
 #unity-progress-bar-empty {
   width: 141px;
   height: 18px;
   margin-top: 10px;
-  background: url("./progress-bar-empty-light.png") no-repeat center;
+  background: url("./progress-bar-empty-dark.png") no-repeat center;
 }
 #unity-progress-bar-full {
   width: 0%;
   height: 18px;
   margin-top: 10px;
-  background: url("./progress-bar-full-light.png") no-repeat center;
+  background: url("./progress-bar-full-dark.png") no-repeat center;
 }
 #unity-footer {
   position: relative;
