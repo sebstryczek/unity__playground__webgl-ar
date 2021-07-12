@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
-    <link rel="stylesheet" href="data/style.css">
+
+    <link rel="stylesheet" href="TemplateData/style.css" />
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src=" https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    
+
     <script>
       var unityCanvas;
       var unityInstance;
@@ -39,85 +43,106 @@
     </script>
 
     <script>
-      AFRAME.registerComponent('markercontroller', { schema: { name : {type: 'string'} },
-        tock: function(time, timeDelta){
+      AFRAME.registerComponent("markercontroller", {
+        schema: { name: { type: "string" } },
+        tock: function (time, timeDelta) {
           let position = new THREE.Vector3();
           let rotation = new THREE.Quaternion();
           let scale = new THREE.Vector3();
-          
-          createUnityMatrix(this.el.object3D).decompose(position, rotation, scale);
-          
-          const serializedInfos = `${this.data.name},${this.el.object3D.visible},${position.toArray()},${rotation.toArray()},${scale.toArray()}`;
-          
-          if(isDetectionManagerReady) {
-            unityInstance.SendMessage("DetectionManager", "markerInfos", serializedInfos);
-          }
-        }
-      });
-      
-      AFRAME.registerComponent('cameratransform', {
-        tock: function(time, timeDelta) {
-                
-                let camtr = new THREE.Vector3();
-                let camro = new THREE.Quaternion();
-                let camsc = new THREE.Vector3();
-                
-                this.el.object3D.matrix.clone().decompose(camtr, camro, camsc);
-                
-                const projection = this.el.components.camera.camera.projectionMatrix.clone();
-                const serializedProj = `${[...projection.elements]}`
-                
-                const posCam = `${[...camtr.toArray()]}`
-                const rotCam = `${[...camro.toArray()]}`
-                
-                if(isCameraReady) {
-                  unityInstance.SendMessage("Main Camera", "setProjection", serializedProj);
-                  unityInstance.SendMessage("Main Camera", "setPosition", posCam);
-                  unityInstance.SendMessage("Main Camera", "setRotation", rotCam);
-                  
-                  let w = window.innerWidth;
-                  let h = window.innerHeight;
-                  
-                  const ratio = unityCanvas.height / h;
 
-                  w *= ratio;
-                  h *= ratio;
-                  
-                  const size = `${w},${h}`;
-                  
-                  unityInstance.SendMessage("Canvas", "setSize", size);
-                }
-                
-                if(gl != null){
-                  gl.dontClearOnFrameStart = true;
-                }
-              }
-            });
-            
-            AFRAME.registerComponent('copycanvas', {
-              tick: function(time, timeDelta) {
-                unityCanvas.width = this.el.canvas.width
-                unityCanvas.height = this.el.canvas.height
-              }
-            });
+          createUnityMatrix(this.el.object3D).decompose(
+            position,
+            rotation,
+            scale
+          );
+
+          const serializedInfos = `${this.data.name},${
+            this.el.object3D.visible
+          },${position.toArray()},${rotation.toArray()},${scale.toArray()}`;
+
+          if (isDetectionManagerReady) {
+            unityInstance.SendMessage(
+              "DetectionManager",
+              "markerInfos",
+              serializedInfos
+            );
+          }
+        },
+      });
+
+      AFRAME.registerComponent("cameratransform", {
+        tock: function (time, timeDelta) {
+          let camtr = new THREE.Vector3();
+          let camro = new THREE.Quaternion();
+          let camsc = new THREE.Vector3();
+
+          this.el.object3D.matrix.clone().decompose(camtr, camro, camsc);
+
+          const projection =
+            this.el.components.camera.camera.projectionMatrix.clone();
+          const serializedProj = `${[...projection.elements]}`;
+
+          const posCam = `${[...camtr.toArray()]}`;
+          const rotCam = `${[...camro.toArray()]}`;
+
+          if (isCameraReady) {
+            unityInstance.SendMessage(
+              "Main Camera",
+              "setProjection",
+              serializedProj
+            );
+            unityInstance.SendMessage("Main Camera", "setPosition", posCam);
+            unityInstance.SendMessage("Main Camera", "setRotation", rotCam);
+
+            let w = window.innerWidth;
+            let h = window.innerHeight;
+
+            const ratio = unityCanvas.height / h;
+
+            w *= ratio;
+            h *= ratio;
+
+            const size = `${w},${h}`;
+
+            unityInstance.SendMessage("Canvas", "setSize", size);
+          }
+
+          if (gl != null) {
+            gl.dontClearOnFrameStart = true;
+          }
+        },
+      });
+
+      AFRAME.registerComponent("copycanvas", {
+        tick: function (time, timeDelta) {
+          unityCanvas.width = this.el.canvas.width;
+          unityCanvas.height = this.el.canvas.height;
+        },
+      });
     </script>
   </head>
   <body>
-
     <a-scene embedded arjs vr-mode-ui="enabled: false" copycanvas>
-      <div id="unity-container" style="height: 100%; width: 100%; background: transparent; z-index: 2;">
-        <canvas id="unity-canvas" width="100%" height="100%" style="height: 100%; width: 100%; background: transparent;"></canvas>
-  
+      <div
+        id="unity-container"
+        style="height: 100%; width: 100%; background: transparent; z-index: 2"
+      >
+        <canvas
+          id="unity-canvas"
+          width="100%"
+          height="100%"
+          style="height: 100%; width: 100%; background: transparent"
+        ></canvas>
+
         <div id="unity-loading-bar">
           <div id="unity-progress-bar-empty">
             <div id="unity-progress-bar-full"></div>
           </div>
         </div>
-  
       </div>
 
       --MARKERS--
-      
+
       <a-entity camera cameratransform></a-entity>
     </a-scene>
 
@@ -130,12 +155,12 @@
         dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
         frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
         codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
-#if MEMORY_FILENAME
+        // #if MEMORY_FILENAME
         memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
-#endif
-#if SYMBOLS_FILENAME
+        // #endif
+        // #if SYMBOLS_FILENAME
         symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
-#endif
+        // #endif
         streamingAssetsUrl: "StreamingAssets",
         companyName: "{{{ COMPANY_NAME }}}",
         productName: "{{{ PRODUCT_NAME }}}",
@@ -159,12 +184,14 @@
       script.onload = () => {
         createUnityInstance(unityCanvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
-        }).then((_unityInstance) => {
-          unityInstance = _unityInstance;
-          loadingBar.style.display = "none";
-        }).catch((message) => {
-          alert(message);
-        });
+        })
+          .then((_unityInstance) => {
+            unityInstance = _unityInstance;
+            loadingBar.style.display = "none";
+          })
+          .catch((message) => {
+            alert(message);
+          });
       };
       document.body.appendChild(script);
     </script>
