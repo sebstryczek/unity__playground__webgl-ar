@@ -13,6 +13,7 @@ Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webAR/ using you
 ### TODO:
 1. Fix marker generator
 2. Fix for desktop browsers
+3. Change splash screen
 
 <br /><br />
 
@@ -24,6 +25,5 @@ Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webXR using your
 - Android: Chrome
 
 ### TODO:
-1. Upgrade html template for Unity 2020.
-2. Create easy to manage scene
-
+1. Clean up template code
+2. Change splash screen
