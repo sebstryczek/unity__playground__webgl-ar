@@ -96,7 +96,7 @@ AFRAME.registerComponent("copycanvas", {
 var buildUrl = "Build";
 var loaderUrl = buildUrl + "/55b027cfe78bae9b0fbebad0d7c12abd.js";
 var config = {
-  dataUrl: buildUrl + "/e5f2691ada67707620e6c5126c343109.data",
+  dataUrl: buildUrl + "/5aa1c7566a345715ee0d7b119e7b5687.data",
   frameworkUrl: buildUrl + "/a838f0ae6d26eb4e91e8d1d584a346fe.js",
   codeUrl: buildUrl + "/cacf42e11e4fbb9d2a6fe57b28623aa9.wasm",
   // #if MEMORY_FILENAME
