@@ -132,6 +132,12 @@ script.onload = () => {
     .then((_unityInstance) => {
       unityInstance = _unityInstance;
       loadingBar.style.display = "none";
+
+      var video = document.querySelector("#camera-view");
+      if (video.srcObject) {
+        video.srcObject.getTracks().forEach((track) => track.stop());
+        video.remove();
+      }
     })
     .catch((message) => {
       alert(message);
