@@ -13,7 +13,6 @@ Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webAR/ using you
 ### TODO:
 1. Fix marker generator
 2. Fix for desktop browsers
-3. Change splash screen
 
 <br /><br />
 
@@ -23,7 +22,3 @@ Go to https://sebstryczek.github.io/unity__playground__webgl-ar/webXR using your
 
 ### Works fine on:
 - Android: Chrome
-
-### TODO:
-1. Clean up template code
-2. Change splash screen
