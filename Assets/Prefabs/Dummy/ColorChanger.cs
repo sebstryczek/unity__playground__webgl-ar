@@ -9,19 +9,33 @@ public class ColorChanger : MonoBehaviour
     private void Awake()
     {
         this.renderer = this.GetComponent<Renderer>();
-        this.renderer.material.color = Color.red;
+        this.renderer.material.color = Color.blue;
     }
 
-    private void OnMouseUp()
-    {
-        if (this.renderer.material.color == Color.red)
-        {
 
-            this.renderer.material.color = Color.blue;
-        }
-        else
+    private void Update()
+    {
+        int fingerCount = 0;
+
+        foreach (Touch touch in Input.touches)
         {
-            this.renderer.material.color = Color.red;
+            if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
+            {
+                fingerCount++;
+            }
+        }
+
+        if (fingerCount > 0)
+        {
+            if (this.renderer.material.color == Color.red)
+            {
+
+                this.renderer.material.color = Color.blue;
+            }
+            else
+            {
+                this.renderer.material.color = Color.red;
+            }
         }
     }
 }
