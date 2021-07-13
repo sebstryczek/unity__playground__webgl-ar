@@ -8,6 +8,6 @@ public class RotateAround : MonoBehaviour
 
     private void Update()
     {
-        this.transform.rotation = this.transform.rotation * Quaternion.Euler(speed * Time.deltaTime, 0, 0);
+        this.transform.rotation = this.transform.rotation * Quaternion.Euler(0, speed * Time.deltaTime, 0);
     }
 }

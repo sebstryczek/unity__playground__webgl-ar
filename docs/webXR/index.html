@@ -79,7 +79,12 @@
         id="unity-canvas"
         width="100%"
         height="100%"
-        style="height: 100%; width: 100%; background: transparent"
+        style="
+          height: 100%;
+          width: 100%;
+          background: transparent;
+          z-index: 9999;
+        "
       ></canvas>
 
       <div id="unity-loading-bar">
@@ -95,9 +100,9 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/55b027cfe78bae9b0fbebad0d7c12abd.js";
       var config = {
-        dataUrl: buildUrl + "/43022e3ec7799581de6b6cc90a6087cc.data",
+        dataUrl: buildUrl + "/37d3110bf20fe06335e33d4798787482.data",
         frameworkUrl: buildUrl + "/7dfba975be21734ed4b0a13c49b331a4.js",
-        codeUrl: buildUrl + "/e91a41ccb5aa4b244a215b384272f878.wasm",
+        codeUrl: buildUrl + "/6972932e50016085847de951b3dc9f6d.wasm",
         // #if MEMORY_FILENAME
         memoryUrl: buildUrl + "/",
         // #endif
