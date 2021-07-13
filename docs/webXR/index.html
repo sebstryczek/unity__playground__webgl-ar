@@ -11,63 +11,8 @@
     <link rel="stylesheet" href="TemplateData/style.css" />
 
     <script src="./TemplateData/three.min.js"></script>
+    <script src="./TemplateData/scripts.js"></script>
 
-    <script>
-      let isCameraReady = false;
-      let isCopyTransformARReady = false;
-      let isTouchListenerReady = false;
-      let gl = null;
-      let unityCanvas = null;
-      let frameDrawer = null;
-      let xrSession = null;
-      let xrRefSpace = null;
-      let xrViewerSpace = null;
-      let xrHitTestSource = null;
-      let isValidHitTest = false;
-      let hitTestPosition = null;
-
-      /* Functions called from Unity */
-
-      function cameraReady() {
-        isCameraReady = true;
-      }
-
-      function dcopyARTransformReady() {
-        isCopyTransformARReady = true;
-      }
-
-      const onButtonClicked = () => {
-        if (!navigator.xr) {
-          throw new Error("XR not supported :(");
-        }
-        if (!xrSession) {
-          navigator.xr
-            .requestSession("immersive-ar", {
-              requiredFeatures: ["local-floor", "hit-test"],
-            })
-            .then(onSessionStarted, onRequestSessionError);
-        } else {
-          xrSession.end();
-        }
-      };
-
-      /* *** */
-    </script>
-    <script>
-      /* Probably not used */
-
-      function touchListenerReady() {
-        isTouchListenerReady = true;
-      }
-
-      function onEndSession(session) {
-        xrHitTestSource.cancel();
-        xrHitTestSource = null;
-        session.end();
-      }
-
-      /* *** */
-    </script>
     <script>
       function onSessionStarted(session) {
         xrSession = session;
@@ -150,9 +95,9 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/55b027cfe78bae9b0fbebad0d7c12abd.js";
       var config = {
-        dataUrl: buildUrl + "/eb50fd2b4ac20a90982899ac2d761852.data",
-        frameworkUrl: buildUrl + "/906b17042b1d22e79bd45f76ef2e0cbf.js",
-        codeUrl: buildUrl + "/137d9f39fa2bb2699753b5055ae264dd.wasm",
+        dataUrl: buildUrl + "/bc086bc3ed9f5301cb09903d9aed4441.data",
+        frameworkUrl: buildUrl + "/98a106c133f808c27189d39d001ccb0f.js",
+        codeUrl: buildUrl + "/9aa0ae02cf541b82fbc566b29fee2ca0.wasm",
         // #if MEMORY_FILENAME
         memoryUrl: buildUrl + "/",
         // #endif
