@@ -9,10 +9,19 @@ public class ColorChanger : MonoBehaviour
     private void Awake()
     {
         this.renderer = this.GetComponent<Renderer>();
+        this.renderer.material.color = Color.red;
     }
 
-    private void OnMouseUpAsButton()
+    private void OnMouseUp()
     {
-        this.renderer.material.color = Random.ColorHSV();
+        if (this.renderer.material.color == Color.red)
+        {
+
+            this.renderer.material.color = Color.blue;
+        }
+        else
+        {
+            this.renderer.material.color = Color.red;
+        }
     }
 }
