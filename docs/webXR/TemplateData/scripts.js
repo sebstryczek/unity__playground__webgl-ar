@@ -123,7 +123,7 @@ function onSelect(event) {
 var buildUrl = "Build";
 var loaderUrl = buildUrl + "/55b027cfe78bae9b0fbebad0d7c12abd.js";
 var config = {
-  dataUrl: buildUrl + "/d68dec1299c3f99108fdee352f38e48b.data",
+  dataUrl: buildUrl + "/ada6b61beb8271a58152e89822e4cf3a.data",
   frameworkUrl: buildUrl + "/a838f0ae6d26eb4e91e8d1d584a346fe.js",
   codeUrl: buildUrl + "/cacf42e11e4fbb9d2a6fe57b28623aa9.wasm",
   // #if MEMORY_FILENAME
