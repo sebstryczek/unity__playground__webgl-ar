@@ -1,4 +1,4 @@
-var unityCanvas = document.querySelector("#unity-canvas");
+var unityCanvas;
 var unityInstance;
 var isCameraReady = false;
 var isDetectionManagerReady = false;
@@ -23,6 +23,8 @@ function createUnityMatrix(el) {
   return rotated;
 }
 /* *** */
+
+/* a-frame setup */
 
 AFRAME.registerComponent("markercontroller", {
   schema: { name: { type: "string" } },
@@ -92,50 +94,54 @@ AFRAME.registerComponent("copycanvas", {
     unityCanvas.height = this.el.canvas.height;
   },
 });
+/* *** */
 
-var buildUrl = "Build";
-var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
-var config = {
-  dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
-  frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-  codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
-  // #if MEMORY_FILENAME
-  memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
-  // #endif
-  // #if SYMBOLS_FILENAME
-  symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
-  // #endif
-  streamingAssetsUrl: "StreamingAssets",
-  companyName: "{{{ COMPANY_NAME }}}",
-  productName: "{{{ PRODUCT_NAME }}}",
-  productVersion: "{{{ PRODUCT_VERSION }}}",
-};
+document.addEventListener("DOMContentLoaded", function () {
+  unityCanvas = document.querySelector("#unity-canvas");
 
-var loadingBar = document.querySelector("#unity-loading-bar");
-var progressBarFull = document.querySelector("#unity-progress-bar-full");
+  var buildUrl = "Build";
+  var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+  var config = {
+    dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+    frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+    codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+    // #if MEMORY_FILENAME
+    memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+    // #endif
+    // #if SYMBOLS_FILENAME
+    symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+    // #endif
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "{{{ COMPANY_NAME }}}",
+    productName: "{{{ PRODUCT_NAME }}}",
+    productVersion: "{{{ PRODUCT_VERSION }}}",
+  };
 
-// By default Unity keeps WebGL canvas render target size matched with
-// the DOM size of the canvas element (scaled by window.devicePixelRatio)
-// Set this to false if you want to decouple this synchronization from
-// happening inside the engine, and you would instead like to size up
-// the canvas DOM size and WebGL render target sizes yourself.
-// config.matchWebGLToCanvasSize = false;
+  var loadingBar = document.querySelector("#unity-loading-bar");
+  var progressBarFull = document.querySelector("#unity-progress-bar-full");
 
-loadingBar.style.display = "block";
+  // By default Unity keeps WebGL canvas render target size matched with
+  // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+  // Set this to false if you want to decouple this synchronization from
+  // happening inside the engine, and you would instead like to size up
+  // the canvas DOM size and WebGL render target sizes yourself.
+  // config.matchWebGLToCanvasSize = false;
 
-var script = document.createElement("script");
-script.src = loaderUrl;
-script.onload = () => {
-  createUnityInstance(unityCanvas, config, (progress) => {
-    progressBarFull.style.width = 100 * progress + "%";
-  })
-    .then((_unityInstance) => {
-      unityInstance = _unityInstance;
-      loadingBar.style.display = "none";
+  loadingBar.style.display = "block";
+
+  var script = document.createElement("script");
+  script.src = loaderUrl;
+  script.onload = () => {
+    createUnityInstance(unityCanvas, config, (progress) => {
+      progressBarFull.style.width = 100 * progress + "%";
     })
-    .catch((message) => {
-      alert(message);
-    });
-};
-
-document.body.appendChild(script);
+      .then((_unityInstance) => {
+        unityInstance = _unityInstance;
+        loadingBar.style.display = "none";
+      })
+      .catch((message) => {
+        alert(message);
+      });
+  };
+  document.body.appendChild(script);
+});
